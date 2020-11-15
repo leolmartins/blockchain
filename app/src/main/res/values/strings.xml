@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">blockchain</string>
+
+    <!-- Home Activity-->
+    <string name="home_activity_tv_action_bar_title">Block Chain Information</string>
+    <!-- Home Activity-->
+
 </resources>

@@ -22,11 +22,12 @@ object AppModules {
         factory<SchedulerProvider> { AppSchedulerProvider() }
     }
 
-    val modules = listOf(
+    val modules = mutableListOf(
         providersModule,
         NetworkModules.modules,
         ServiceModules.modules,
         UseCaseModules.modules,
-        UiModules.modules
-    )
+    ).apply {
+        addAll(UiModules.modules)
+    }
 }
