@@ -1,5 +1,6 @@
 package com.example.blockchain.shared.modules
 
+import com.example.blockchain.ui.HomeModule
 import org.koin.dsl.module
 
 /**
@@ -8,6 +9,6 @@ import org.koin.dsl.module
 object UiModules {
 
     val modules = module {
-
+        HomeModule.module
     }
 }

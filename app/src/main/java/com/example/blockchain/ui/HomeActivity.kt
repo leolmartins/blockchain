@@ -1,12 +1,17 @@
 package com.example.blockchain.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.example.blockchain.R
+import com.example.blockchain.base.BaseActivity
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
-class HomeActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class HomeActivity : BaseActivity<HomeContract.Presenter>(), HomeContract.View {
+
+    override val presenter: HomeContract.Presenter by inject { parametersOf(this)}
+
+    override val layoutRes = R.layout.activity_main
+
+    override fun initialize() {
+        // TODO
     }
 }
