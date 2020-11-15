@@ -9,15 +9,15 @@ import com.example.blockchain.shared.providers.SchedulerProvider
 abstract class BasePresenter<ViewType : BaseContract.View, InteractorType>(
     protected val view: ViewType,
     protected val interactor: InteractorType,
-    protected val disposable: DisposableProvider,
+    protected val disposableProvider: DisposableProvider,
     protected val schedulerProvider: SchedulerProvider
 ) : BaseContract.Presenter {
 
     override fun interrupt() {
-        disposable.clear()
+        disposableProvider.clear()
     }
 
     override fun detach() {
-        disposable.dispose()
+        disposableProvider.dispose()
     }
 }

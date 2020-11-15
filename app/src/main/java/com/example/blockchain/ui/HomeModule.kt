@@ -11,7 +11,7 @@ object HomeModule {
         factory<HomeContract.Presenter> { (view: HomeContract.View) ->
             HomePresenterImpl(
                 view,
-                HomeInteractorImpl(),
+                HomeInteractorImpl(get()),
                 get(),
                 get()
             )
