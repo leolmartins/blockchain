@@ -1,10 +1,14 @@
 buildscript {
     ext.kotlin_version = "1.4.10"
 
+    ext.timber_version = "4.7.1"
     ext.mockk_version = "1.10.2"
     ext.koin_version = "2.2.0"
     ext.retrofit2_version = "2.9.0"
+    ext.retrofit2adapter_version = "2.9.0"
+    ext.retrofit2gson_version = "2.6.1"
     ext.rxkotlin_version = "3.0.1"
+    ext.rxandroid_version = "3.0.0"
 
     repositories {
         google()
