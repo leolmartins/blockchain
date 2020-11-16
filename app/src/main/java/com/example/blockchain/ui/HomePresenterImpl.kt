@@ -25,8 +25,6 @@ class HomePresenterImpl(
     schedulerProvider
 ), HomeContract.Presenter {
 
-    private var currentTimeSpan: ChartTimeSpan = ChartTimeSpan.ONE_MONTH
-
     override fun checkCurrentCache() {
         interactor.getHomeData()
             .subscribeOn(schedulerProvider.io())
@@ -34,8 +32,7 @@ class HomePresenterImpl(
             .doOnSubscribe { view.showLoading() }
             .doFinally { view.hideLoading() }
             .subscribe({
-                this.currentTimeSpan = it.chart.timeSpan
-                view.setupTimeSpan(currentTimeSpan)
+                view.setupTimeSpan(it.chart.timeSpan)
                 onFetchStatsSuccess(it.stats)
                 onFetchChartSuccess(it.chart)
 
