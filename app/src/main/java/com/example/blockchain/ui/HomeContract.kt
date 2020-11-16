@@ -1,6 +1,8 @@
 package com.example.blockchain.ui
 
 import com.example.blockchain.base.BaseContract
+import com.example.blockchain.shared.model.ChartItemDisplay
+import com.example.blockchain.shared.model.ChartTimeSpan
 import com.example.blockchain.shared.usecases.FetchBlockChainChartUseCase
 import com.example.blockchain.shared.usecases.FetchBlockChainStatsUseCase
 
@@ -18,6 +20,8 @@ interface HomeContract : BaseContract {
         fun showErrorToast()
 
         fun fillMarketPrice(price: String)
+
+        fun fillChart(chartDisplay: List<ChartItemDisplay>)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -25,6 +29,8 @@ interface HomeContract : BaseContract {
         fun fetchBlockChainStats()
 
         fun fetchChart()
+
+        fun fetchChart(timeSpan: ChartTimeSpan)
     }
 
     interface Interactor : BaseContract.Interactor, FetchBlockChainStatsUseCase,
