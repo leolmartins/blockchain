@@ -31,12 +31,14 @@ class HomeActivity : BaseActivity<HomeContract.Presenter>(), HomeContract.View,
     override fun initialize() {
         supportActionBar?.setTitle(R.string.home_activity_tv_action_bar_title)
 
-        home_bt_update_price.setOnClickListener {
-            presenter.fetchBlockChainStats()
+        home_bt_update_price.setOnClickListener { presenter.fetchBlockChainStats() }
+
+        home_activity_rv_chart.apply {
+            layoutManager = LinearLayoutManager(this@HomeActivity, RecyclerView.VERTICAL, false)
+            adapter = chartAdapter
         }
 
-        setupChart()
-        setupTimeSpanSpinner()
+        presenter.checkCurrentCache()
     }
 
     override fun showLoading() {
@@ -65,27 +67,21 @@ class HomeActivity : BaseActivity<HomeContract.Presenter>(), HomeContract.View,
         chartAdapter.list = chartDisplay
     }
 
-    override fun onItemSelected(parent: AdapterView<*>, p1: View?, position: Int, id: Long) {
-        presenter.fetchChart(parent.getItemAtPosition(position) as ChartTimeSpan)
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) = Unit
-
-    private fun setupChart() {
-        home_activity_rv_chart.apply {
-            layoutManager = LinearLayoutManager(this@HomeActivity, RecyclerView.VERTICAL, true)
-            adapter = chartAdapter
-        }
-    }
-
-    private fun setupTimeSpanSpinner() {
+    override fun setupTimeSpan(currentTimeSpan: ChartTimeSpan) {
         home_activity_sp_timespan.apply {
             adapter = ArrayAdapter(
                 this@HomeActivity,
                 android.R.layout.simple_spinner_dropdown_item,
                 ChartTimeSpan.values()
             )
-            onItemSelectedListener = this@HomeActivity
+            setSelection(currentTimeSpan.id)
+            post { onItemSelectedListener = this@HomeActivity }
         }
     }
+
+    override fun onItemSelected(parent: AdapterView<*>, p1: View?, position: Int, id: Long) {
+        presenter.fetchChart(parent.getItemAtPosition(position) as ChartTimeSpan)
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) = Unit
 }

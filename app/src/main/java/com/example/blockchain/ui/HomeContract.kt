@@ -5,6 +5,7 @@ import com.example.blockchain.shared.model.ChartItemDisplay
 import com.example.blockchain.shared.model.ChartTimeSpan
 import com.example.blockchain.shared.usecases.FetchBlockChainChartUseCase
 import com.example.blockchain.shared.usecases.FetchBlockChainStatsUseCase
+import com.example.blockchain.shared.usecases.GetHomeDataUseCase
 
 /**
  * @author Leonardo Martins on 15/11/20
@@ -22,17 +23,19 @@ interface HomeContract : BaseContract {
         fun fillMarketPrice(price: String)
 
         fun fillChart(chartDisplay: List<ChartItemDisplay>)
+
+        fun setupTimeSpan(currentTimeSpan: ChartTimeSpan)
     }
 
     interface Presenter : BaseContract.Presenter {
 
-        fun fetchBlockChainStats()
+        fun checkCurrentCache()
 
-        fun fetchChart()
+        fun fetchBlockChainStats()
 
         fun fetchChart(timeSpan: ChartTimeSpan)
     }
 
-    interface Interactor : BaseContract.Interactor, FetchBlockChainStatsUseCase,
+    interface Interactor : BaseContract.Interactor, GetHomeDataUseCase, FetchBlockChainStatsUseCase,
         FetchBlockChainChartUseCase
 }

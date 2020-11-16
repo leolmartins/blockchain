@@ -13,5 +13,10 @@ data class Chart(
     data class ChartValue(
         val timeStamp: LocalDateTime,
         val value: Double
-    )
+    ) {
+        constructor(valueResponse: ChartResponse.ChartResponseValue) : this(
+            valueResponse.timeStamp,
+            valueResponse.value
+        )
+    }
 }
