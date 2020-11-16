@@ -17,13 +17,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/home_activity_stats_container_min_height"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -45,60 +47,68 @@
 
             </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/home_activity_pb_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/spacing_huge"
-                android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="invisible"
-                tools:visibility="visible" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/home_bt_update_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:backgroundTint="@color/white"
+                    android:lines="2"
+                    app:icon="@drawable/ic_update"
+                    app:iconTint="@color/black" />
+
+                <ProgressBar
+                    android:id="@+id/home_activity_pb_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/spacing_huge"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textview.MaterialTextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:text="@string/home_activity_tv_chart_label" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_weight="1"
+            android:text="@string/home_activity_tv_chart_label" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/home_activity_sp_timespan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_micro"
         android:background="@color/gray" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </ScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_micro"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        android:background="@color/gray" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_bt_fetch_stats"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_activity_rv_chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginBottom="16dp"
-        android:text="@string/home_activity_bt_fetch_stats"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_bt_fetch_chart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginBottom="16dp"
-        android:text="Fetch Chart"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        tools:listitem="@layout/home_activity_chart_item_layout" />
 
 </LinearLayout>

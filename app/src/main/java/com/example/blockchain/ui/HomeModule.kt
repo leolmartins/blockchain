@@ -8,6 +8,7 @@ import org.koin.dsl.module
 object HomeModule {
 
     val module = module {
+        factory { ChartAdapter() }
         factory<HomeContract.Presenter> { (view: HomeContract.View) ->
             HomePresenterImpl(
                 view,
