@@ -19,6 +19,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable = true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -65,4 +68,7 @@ dependencies {
 
     // mockk
     testImplementation "io.mockk:mockk:$mockk_version"
+
+    // threeten
+    implementation "com.jakewharton.threetenabp:threetenabp:$threeten_version"
 }

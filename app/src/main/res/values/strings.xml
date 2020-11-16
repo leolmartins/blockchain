@@ -4,7 +4,7 @@
     <!-- Home Activity-->
     <string name="home_activity_tv_action_bar_title">Block Chain Information</string>
     <string name="home_activity_tv_price_label">Market price today</string>
-    <string name="home_activity_tv_history_label">History</string>
+    <string name="home_activity_tv_chart_label">Chart</string>
     <string name="home_activity_tv_error_toast">Error while loading information, check your internet connection</string>
     <string name="home_activity_bt_fetch_stats">Fetch stats</string>
     <!-- Home Activity-->

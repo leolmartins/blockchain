@@ -1,12 +1,21 @@
 package com.example.blockchain.shared.modules
 
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import com.google.gson.JsonParseException
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import org.threeten.bp.DateTimeException
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneOffset
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
+import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
 /**
@@ -35,6 +44,26 @@ object NetworkModules {
                         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                         .build()
                 }
+        }
+    }
+
+    class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime> {
+
+        override fun deserialize(
+            json: JsonElement?,
+            typeOfT: Type?,
+            context: JsonDeserializationContext?
+        ): LocalDateTime {
+            json?.toString()?.toLong()?.let { unixDate ->
+                try {
+                    return LocalDateTime.ofEpochSecond(unixDate, 0, ZoneOffset.UTC)
+                } catch (exception: DateTimeException) {
+                    Timber.d("$unixDate could not be parsed to LocalDateTime.")
+                }
+            }
+            throw JsonParseException(
+                "LocalDateTime could not be parsed."
+            )
         }
     }
 }

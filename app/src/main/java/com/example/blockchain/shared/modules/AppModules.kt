@@ -6,6 +6,7 @@ import com.example.blockchain.shared.providers.DisposableProvider
 import com.example.blockchain.shared.providers.SchedulerProvider
 import com.google.gson.GsonBuilder
 import org.koin.dsl.module
+import org.threeten.bp.LocalDateTime
 
 /**
  * @author Leonardo Martins on 15/11/20
@@ -16,6 +17,10 @@ object AppModules {
         single {
             GsonBuilder()
                 .setLenient()
+                .registerTypeAdapter(
+                    LocalDateTime::class.java,
+                    NetworkModules.LocalDateTimeDeserializer()
+                )
                 .create()
         }
         factory<DisposableProvider> { AppDisposableProvider() }
@@ -30,4 +35,6 @@ object AppModules {
     ).apply {
         addAll(UiModules.modules)
     }
+
+
 }
