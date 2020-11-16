@@ -1,6 +1,7 @@
 package com.example.blockchain.ui
 
 import com.example.blockchain.base.BaseContract
+import com.example.blockchain.shared.usecases.FetchBlockChainChartUseCase
 import com.example.blockchain.shared.usecases.FetchBlockChainStatsUseCase
 
 /**
@@ -22,7 +23,10 @@ interface HomeContract : BaseContract {
     interface Presenter : BaseContract.Presenter {
 
         fun fetchBlockChainStats()
+
+        fun fetchChart()
     }
 
-    interface Interactor : BaseContract.Interactor, FetchBlockChainStatsUseCase
+    interface Interactor : BaseContract.Interactor, FetchBlockChainStatsUseCase,
+        FetchBlockChainChartUseCase
 }

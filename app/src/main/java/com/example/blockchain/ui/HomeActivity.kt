@@ -7,6 +7,7 @@ import com.example.blockchain.R
 import com.example.blockchain.base.BaseActivity
 import kotlinx.android.synthetic.main.home_activity_layout.home_activity_pb_loading
 import kotlinx.android.synthetic.main.home_activity_layout.home_activity_tv_price
+import kotlinx.android.synthetic.main.home_activity_layout.home_bt_fetch_chart
 import kotlinx.android.synthetic.main.home_activity_layout.home_bt_fetch_stats
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -22,6 +23,9 @@ class HomeActivity : BaseActivity<HomeContract.Presenter>(), HomeContract.View {
 
         home_bt_fetch_stats.setOnClickListener {
             presenter.fetchBlockChainStats()
+        }
+        home_bt_fetch_chart.setOnClickListener {
+            presenter.fetchChart()
         }
     }
 

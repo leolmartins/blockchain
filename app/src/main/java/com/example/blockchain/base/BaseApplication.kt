@@ -2,6 +2,7 @@ package com.example.blockchain.base
 
 import android.app.Application
 import com.example.blockchain.shared.modules.AppModules
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,6 +16,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        AndroidThreeTen.init(this)
 
         startKoin {
             androidLogger()

@@ -1,5 +1,7 @@
 package com.example.blockchain.shared.modules
 
+import com.example.blockchain.shared.usecases.FetchBlockChainChartUseCase
+import com.example.blockchain.shared.usecases.FetchBlockChainChartUseCaseImpl
 import com.example.blockchain.shared.usecases.FetchBlockChainStatsUseCase
 import com.example.blockchain.shared.usecases.FetchBlockChainStatsUseCaseImpl
 import org.koin.dsl.module
@@ -11,5 +13,6 @@ object UseCaseModules {
 
     val modules = module {
         factory<FetchBlockChainStatsUseCase> { FetchBlockChainStatsUseCaseImpl(get()) }
+        factory<FetchBlockChainChartUseCase> { FetchBlockChainChartUseCaseImpl(get()) }
     }
 }
